@@ -1,0 +1,34 @@
+{
+  "name": "counter",
+  "version": "0.0.1",
+  "devDependencies": {
+    "elm-hot-loader": "^0.5.4",
+    "elm-webpack-loader": "^4.3.1",
+    "enzyme": "^2.9.1",
+    "eslint-config-prettier": "^2.3.0",
+    "eslint-plugin-prettier": "^2.1.2",
+    "flow-bin": "^0.50.0",
+    "prettier": "^1.5.3",
+    "proxyquire": "^1.8.0",
+    "react-scripts": "^1.0.10",
+    "react-test-renderer": "^15.6.1"
+  },
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.2",
+    "redux-elm-middleware": "^4.0.0"
+  },
+  "scripts": {
+    "install:elm": "elm package install -y && cd tests && elm package install -y",
+    "start": "node react-scripts-interceptor.js start",
+    "build": "node react-scripts-interceptor.js build",
+    "eject": "react-scripts eject",
+    "test": "run-p test:js test:elm:watch",
+    "test:js": "react-scripts test --env=jsdom",
+    "test:elm": "elm test",
+    "test:elm:watch": "nodemon --watch src/modules --ext elm --exec elm-test",
+    "eslint": "node_modules/eslint/bin/eslint.js"
+  }
+}
