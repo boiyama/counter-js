@@ -1,16 +1,15 @@
 // @flow
-import { createStore, applyMiddleware } from 'redux'
-import createSagaMiddleware from 'redux-saga'
-import rootReducer, { rootSaga } from './modules'
+import { createStore, applyMiddleware } from "redux"
+import createSagaMiddleware from "redux-saga"
+import rootReducer, { rootSaga } from "./modules"
 
-
-const configureStore = (preloadedState: Object = {}) => {  
+const configureStore = (preloadedState: Object = {}) => {
   const sagaMiddleware = createSagaMiddleware()
 
   const store = createStore(
     rootReducer,
     preloadedState,
-    applyMiddleware(sagaMiddleware),
+    applyMiddleware(sagaMiddleware)
   )
 
   sagaMiddleware.run(rootSaga)
