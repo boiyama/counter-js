@@ -40,7 +40,7 @@ describe("Actions", () => {
     expect(incrementIfOdd()).toEqual({ type: "INCREMENT_IF_ODD" })
   })
 
-  it("incrementAsync should create INCREMENT_ASYNC action", () => {
+  it("incrementAsync should dispatch INCREMENT action after timeout", () => {
     jest.useFakeTimers()
     const dispatch = jest.fn()
     incrementAsync()(dispatch)
