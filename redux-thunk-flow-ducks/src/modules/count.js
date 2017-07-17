@@ -6,20 +6,20 @@ import type { Dispatch } from "./"
 export type State = number
 
 export type Action =
-  | { type: "INCREMENT" }
-  | { type: "INCREMENT_IF_ODD" }
-  | { type: "INCREMENT_ASYNC" }
-  | { type: "DECREMENT" }
+  | { type: "INCREASE" }
+  | { type: "INCREASE_IF_ODD" }
+  | { type: "INCREASE_ASYNC" }
+  | { type: "DECREASE" }
 
 // Reducer
 
 export default (state: State = 0, action: Object): State => {
   switch (action.type) {
-    case "INCREMENT":
+    case "INCREASE":
       return state + 1
-    case "INCREMENT_IF_ODD":
+    case "INCREASE_IF_ODD":
       return state % 2 !== 0 ? state + 1 : state
-    case "DECREMENT":
+    case "DECREASE":
       return state - 1
     default:
       return state
@@ -28,11 +28,11 @@ export default (state: State = 0, action: Object): State => {
 
 // ActionCreators
 
-export const increment = () => ({ type: "INCREMENT" })
+export const increase = () => ({ type: "INCREASE" })
 
-export const incrementIfOdd = () => ({ type: "INCREMENT_IF_ODD" })
+export const increaseIfOdd = () => ({ type: "INCREASE_IF_ODD" })
 
-export const incrementAsync = () => (dispatch: Dispatch) =>
-  setTimeout(() => dispatch(increment()), 1000)
+export const increaseAsync = () => (dispatch: Dispatch) =>
+  setTimeout(() => dispatch(increase()), 1000)
 
-export const decrement = () => ({ type: "DECREMENT" })
+export const decrease = () => ({ type: "DECREASE" })

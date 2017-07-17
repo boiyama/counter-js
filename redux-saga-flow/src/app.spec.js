@@ -4,12 +4,12 @@ import { shallow } from 'enzyme'
 import { delay, takeEvery } from 'redux-saga'
 import { put, call } from 'redux-saga/effects'
 import {
-  increment,
-  incrementIfOdd,
-  incrementAsync,
-  decrement,
+  increase,
+  increaseIfOdd,
+  increaseAsync,
+  decrease,
   reducer,
-  incrementAsyncSaga,
+  increaseAsyncSaga,
   Counter,
   mapStateToProps,
   mapDispatchToProps,
@@ -17,16 +17,16 @@ import {
 
 
 describe('Actions', () => {
-  it('increment should create INCREMENT action', () => {
-    expect(increment()).toEqual({ type: 'INCREMENT' })
+  it('increase should create INCREASE action', () => {
+    expect(increase()).toEqual({ type: 'INCREASE' })
   })
 
-  it('incrementIfOdd should create INCREMENT_IF_ODD action', () => {
-    expect(incrementIfOdd()).toEqual({ type: 'INCREMENT_IF_ODD' })
+  it('increaseIfOdd should create INCREASE_IF_ODD action', () => {
+    expect(increaseIfOdd()).toEqual({ type: 'INCREASE_IF_ODD' })
   })
 
-  it('decrement should create DECREMENT action', () => {
-    expect(decrement()).toEqual({ type: 'DECREMENT' })
+  it('decrease should create DECREASE action', () => {
+    expect(decrease()).toEqual({ type: 'DECREASE' })
   })
 })
 
@@ -37,17 +37,17 @@ describe('Reducers', () => {
       expect(reducer(undefined, {})).toBe(0)
     })
 
-    it('should handle INCREMENT action', () => {
-      expect(reducer(1, { type: 'INCREMENT' })).toBe(2)
+    it('should handle INCREASE action', () => {
+      expect(reducer(1, { type: 'INCREASE' })).toBe(2)
     })
 
-    it('should handle INCREMENT_IF_ODD action', () => {
-      expect(reducer(0, { type: 'INCREMENT_IF_ODD' })).toBe(0)
-      expect(reducer(1, { type: 'INCREMENT_IF_ODD' })).toBe(2)
+    it('should handle INCREASE_IF_ODD action', () => {
+      expect(reducer(0, { type: 'INCREASE_IF_ODD' })).toBe(0)
+      expect(reducer(1, { type: 'INCREASE_IF_ODD' })).toBe(2)
     })
 
-    it('should handle DECREMENT action', () => {
-      expect(reducer(1, { type: 'DECREMENT' })).toBe(0)
+    it('should handle DECREASE action', () => {
+      expect(reducer(1, { type: 'DECREASE' })).toBe(0)
     })
 
     it('should ignore unknown actions', () => {
@@ -58,13 +58,13 @@ describe('Reducers', () => {
 
 
 describe('Sagas', () => {
-  describe('incrementAsyncSaga', () => {
-    it('calls delay(1000), dispatchs an INCREMENT action, and be done', () => {
-      const generator = incrementAsyncSaga()
+  describe('increaseAsyncSaga', () => {
+    it('calls delay(1000), dispatchs an INCREASE action, and be done', () => {
+      const generator = increaseAsyncSaga()
 
       expect(generator.next().value).toEqual(call(delay, 1000))
 
-      expect(generator.next().value).toEqual(put(increment()))
+      expect(generator.next().value).toEqual(put(increase()))
 
       expect(generator.next().done).toBeTruthy()
     })
@@ -73,18 +73,18 @@ describe('Sagas', () => {
 
 
 describe('Counter Presentational', () => {
-  const onIncrement = jest.fn()
-  const onIncrementIfOdd = jest.fn()
-  const onIncrementAsync = jest.fn()
-  const onDecrement = jest.fn()
+  const onIncrease = jest.fn()
+  const onIncreaseIfOdd = jest.fn()
+  const onIncreaseAsync = jest.fn()
+  const onDecrease = jest.fn()
 
   const component = shallow(
     <Counter
       count={0}
-      onIncrement={onIncrement}
-      onIncrementIfOdd={onIncrementIfOdd}
-      onIncrementAsync={onIncrementAsync}
-      onDecrement={onDecrement}
+      onIncrease={onIncrease}
+      onIncreaseIfOdd={onIncreaseIfOdd}
+      onIncreaseAsync={onIncreaseAsync}
+      onDecrease={onDecrease}
     />
   )
 
@@ -92,24 +92,24 @@ describe('Counter Presentational', () => {
     expect(component.find('p').text()).toMatch(/^Clicked: 0 times/)
   })
 
-  it('first button should call onIncrement', () => {
+  it('first button should call onIncrease', () => {
     component.find('button').at(0).simulate('click')
-    expect(onIncrement).toBeCalled()
+    expect(onIncrease).toBeCalled()
   })
 
-  it('second button should call onDecrement', () => {
+  it('second button should call onDecrease', () => {
     component.find('button').at(1).simulate('click')
-    expect(onDecrement).toBeCalled()
+    expect(onDecrease).toBeCalled()
   })
 
-  it('third button should call onIncrementIfOdd', () => {
+  it('third button should call onIncreaseIfOdd', () => {
     component.find('button').at(2).simulate('click')
-    expect(onIncrementIfOdd).toBeCalled()
+    expect(onIncreaseIfOdd).toBeCalled()
   })
 
-  it('fourth button should call onIncrementAsync', () => {
+  it('fourth button should call onIncreaseAsync', () => {
     component.find('button').at(3).simulate('click')
-    expect(onIncrementAsync).toBeCalled()
+    expect(onIncreaseAsync).toBeCalled()
   })
 })
 
@@ -125,24 +125,24 @@ describe('Counter Container', () => {
     const dispatch = jest.fn()
     const props = mapDispatchToProps(dispatch)
 
-    it('onIncrement should dispatch increment', () => {
-      props.onIncrement()
-      expect(dispatch).toBeCalledWith(increment())
+    it('onIncrease should dispatch increase', () => {
+      props.onIncrease()
+      expect(dispatch).toBeCalledWith(increase())
     })
 
-    it('onIncrementIfOdd should dispatch incrementIfOdd', () => {
-      props.onIncrementIfOdd()
-      expect(dispatch).toBeCalledWith(incrementIfOdd())
+    it('onIncreaseIfOdd should dispatch increaseIfOdd', () => {
+      props.onIncreaseIfOdd()
+      expect(dispatch).toBeCalledWith(increaseIfOdd())
     })
 
-    it('onIncrementAsync should dispatch incrementAsync', () => {
-      props.onIncrementAsync()
-      expect(dispatch).toBeCalledWith(incrementAsync())
+    it('onIncreaseAsync should dispatch increaseAsync', () => {
+      props.onIncreaseAsync()
+      expect(dispatch).toBeCalledWith(increaseAsync())
     })
 
-    it('onDecrement should dispatch decrement', () => {
-      props.onDecrement()
-      expect(dispatch).toBeCalledWith(decrement())
+    it('onDecrease should dispatch decrease', () => {
+      props.onDecrease()
+      expect(dispatch).toBeCalledWith(decrease())
     })
   })
 })

@@ -1,6 +1,6 @@
 // @flow
 import { mapStateToProps, mapDispatchToProps } from "./Counter"
-import { increment, incrementIfOdd, decrement } from "../modules/count"
+import { increase, increaseIfOdd, decrease } from "../modules/count"
 
 describe("Counter container", () => {
   describe("mapStateToProps", () => {
@@ -17,28 +17,28 @@ describe("Counter container", () => {
       dispatch.mockClear()
     })
 
-    it("onIncrement should dispatch increment", () => {
-      props.onIncrement()
-      expect(dispatch).toBeCalledWith(increment())
+    it("onIncrease should dispatch increase", () => {
+      props.onIncrease()
+      expect(dispatch).toBeCalledWith(increase())
     })
 
-    it("onIncrementIfOdd should dispatch incrementIfOdd", () => {
-      props.onIncrementIfOdd()
-      expect(dispatch).toBeCalledWith(incrementIfOdd())
+    it("onIncreaseIfOdd should dispatch increaseIfOdd", () => {
+      props.onIncreaseIfOdd()
+      expect(dispatch).toBeCalledWith(increaseIfOdd())
     })
 
-    it("onIncrementAsync should dispatch incrementAsync", () => {
+    it("onIncreaseAsync should dispatch increaseAsync", () => {
       jest.useFakeTimers()
-      props.onIncrementAsync()
+      props.onIncreaseAsync()
       const dispatch2 = jest.fn()
       dispatch.mock.calls[0][0](dispatch2)
       jest.runAllTimers()
-      expect(dispatch2).toBeCalledWith(increment())
+      expect(dispatch2).toBeCalledWith(increase())
     })
 
-    it("onDecrement should dispatch decrement", () => {
-      props.onDecrement()
-      expect(dispatch).toBeCalledWith(decrement())
+    it("onDecrease should dispatch decrease", () => {
+      props.onDecrease()
+      expect(dispatch).toBeCalledWith(decrease())
     })
   })
 })

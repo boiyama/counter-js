@@ -1,9 +1,9 @@
 // @flow
 import countReducer, {
-  increment,
-  incrementIfOdd,
-  incrementAsync,
-  decrement
+  increase,
+  increaseIfOdd,
+  increaseAsync,
+  decrease
 } from "./count"
 
 describe("Reducers", () => {
@@ -12,17 +12,17 @@ describe("Reducers", () => {
       expect(countReducer(undefined, {})).toBe(0)
     })
 
-    it("should handle INCREMENT action", () => {
-      expect(countReducer(1, { type: "INCREMENT" })).toBe(2)
+    it("should handle INCREASE action", () => {
+      expect(countReducer(1, { type: "INCREASE" })).toBe(2)
     })
 
-    it("should handle INCREMENT_IF_ODD action", () => {
-      expect(countReducer(0, { type: "INCREMENT_IF_ODD" })).toBe(0)
-      expect(countReducer(1, { type: "INCREMENT_IF_ODD" })).toBe(2)
+    it("should handle INCREASE_IF_ODD action", () => {
+      expect(countReducer(0, { type: "INCREASE_IF_ODD" })).toBe(0)
+      expect(countReducer(1, { type: "INCREASE_IF_ODD" })).toBe(2)
     })
 
-    it("should handle DECREMENT action", () => {
-      expect(countReducer(1, { type: "DECREMENT" })).toBe(0)
+    it("should handle DECREASE action", () => {
+      expect(countReducer(1, { type: "DECREASE" })).toBe(0)
     })
 
     it("should ignore unknown actions", () => {
@@ -32,23 +32,23 @@ describe("Reducers", () => {
 })
 
 describe("Actions", () => {
-  it("increment should create INCREMENT action", () => {
-    expect(increment()).toEqual({ type: "INCREMENT" })
+  it("increase should create INCREASE action", () => {
+    expect(increase()).toEqual({ type: "INCREASE" })
   })
 
-  it("incrementIfOdd should create INCREMENT_IF_ODD action", () => {
-    expect(incrementIfOdd()).toEqual({ type: "INCREMENT_IF_ODD" })
+  it("increaseIfOdd should create INCREASE_IF_ODD action", () => {
+    expect(increaseIfOdd()).toEqual({ type: "INCREASE_IF_ODD" })
   })
 
-  it("incrementAsync should dispatch INCREMENT action after timeout", () => {
+  it("increaseAsync should dispatch INCREASE action after timeout", () => {
     jest.useFakeTimers()
     const dispatch = jest.fn()
-    incrementAsync()(dispatch)
+    increaseAsync()(dispatch)
     jest.runAllTimers()
-    expect(dispatch).toBeCalledWith(increment())
+    expect(dispatch).toBeCalledWith(increase())
   })
 
-  it("decrement should create DECREMENT action", () => {
-    expect(decrement()).toEqual({ type: "DECREMENT" })
+  it("decrease should create DECREASE action", () => {
+    expect(decrease()).toEqual({ type: "DECREASE" })
   })
 })

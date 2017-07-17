@@ -2,11 +2,11 @@
 import { delay } from "redux-saga"
 import { put, call } from "redux-saga/effects"
 import countReducer, {
-  increment,
-  incrementIfOdd,
-  incrementAsync,
-  decrement,
-  incrementAsyncSaga
+  increase,
+  increaseIfOdd,
+  increaseAsync,
+  decrease,
+  increaseAsyncSaga
 } from "./count"
 
 describe("Reducers", () => {
@@ -15,17 +15,17 @@ describe("Reducers", () => {
       expect(countReducer(undefined, {})).toBe(0)
     })
 
-    it("should handle INCREMENT action", () => {
-      expect(countReducer(1, { type: "INCREMENT" })).toBe(2)
+    it("should handle INCREASE action", () => {
+      expect(countReducer(1, { type: "INCREASE" })).toBe(2)
     })
 
-    it("should handle INCREMENT_IF_ODD action", () => {
-      expect(countReducer(0, { type: "INCREMENT_IF_ODD" })).toBe(0)
-      expect(countReducer(1, { type: "INCREMENT_IF_ODD" })).toBe(2)
+    it("should handle INCREASE_IF_ODD action", () => {
+      expect(countReducer(0, { type: "INCREASE_IF_ODD" })).toBe(0)
+      expect(countReducer(1, { type: "INCREASE_IF_ODD" })).toBe(2)
     })
 
-    it("should handle DECREMENT action", () => {
-      expect(countReducer(1, { type: "DECREMENT" })).toBe(0)
+    it("should handle DECREASE action", () => {
+      expect(countReducer(1, { type: "DECREASE" })).toBe(0)
     })
 
     it("should ignore unknown actions", () => {
@@ -35,30 +35,30 @@ describe("Reducers", () => {
 })
 
 describe("Actions", () => {
-  it("increment should create INCREMENT action", () => {
-    expect(increment()).toEqual({ type: "INCREMENT" })
+  it("increase should create INCREASE action", () => {
+    expect(increase()).toEqual({ type: "INCREASE" })
   })
 
-  it("incrementIfOdd should create INCREMENT_IF_ODD action", () => {
-    expect(incrementIfOdd()).toEqual({ type: "INCREMENT_IF_ODD" })
+  it("increaseIfOdd should create INCREASE_IF_ODD action", () => {
+    expect(increaseIfOdd()).toEqual({ type: "INCREASE_IF_ODD" })
   })
 
-  it("incrementAsync should create INCREMENT_ASYNC action", () => {
-    expect(incrementAsync()).toEqual({ type: "INCREMENT_ASYNC" })
+  it("increaseAsync should create INCREASE_ASYNC action", () => {
+    expect(increaseAsync()).toEqual({ type: "INCREASE_ASYNC" })
   })
 
-  it("decrement should create DECREMENT action", () => {
-    expect(decrement()).toEqual({ type: "DECREMENT" })
+  it("decrease should create DECREASE action", () => {
+    expect(decrease()).toEqual({ type: "DECREASE" })
   })
 })
 
-describe("incrementAsyncSaga", () => {
-  it("calls delay(1000), dispatchs an INCREMENT action, and be done", () => {
-    const generator = incrementAsyncSaga()
+describe("increaseAsyncSaga", () => {
+  it("calls delay(1000), dispatchs an INCREASE action, and be done", () => {
+    const generator = increaseAsyncSaga()
 
     expect(generator.next().value).toEqual(call(delay, 1000))
 
-    expect(generator.next().value).toEqual(put(increment()))
+    expect(generator.next().value).toEqual(put(increase()))
 
     expect(generator.next().done).toBeTruthy()
   })

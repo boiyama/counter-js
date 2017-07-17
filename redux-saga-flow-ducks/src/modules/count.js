@@ -7,20 +7,20 @@ import { call, put } from "redux-saga/effects"
 export type State = number
 
 export type Action =
-  | { type: "INCREMENT" }
-  | { type: "INCREMENT_IF_ODD" }
-  | { type: "INCREMENT_ASYNC" }
-  | { type: "DECREMENT" }
+  | { type: "INCREASE" }
+  | { type: "INCREASE_IF_ODD" }
+  | { type: "INCREASE_ASYNC" }
+  | { type: "DECREASE" }
 
 // Reducer
 
 export default (state: State = 0, action: Object): State => {
   switch (action.type) {
-    case "INCREMENT":
+    case "INCREASE":
       return state + 1
-    case "INCREMENT_IF_ODD":
+    case "INCREASE_IF_ODD":
       return state % 2 !== 0 ? state + 1 : state
-    case "DECREMENT":
+    case "DECREASE":
       return state - 1
     default:
       return state
@@ -29,21 +29,21 @@ export default (state: State = 0, action: Object): State => {
 
 // ActionCreators
 
-export const increment = () => ({ type: "INCREMENT" })
+export const increase = () => ({ type: "INCREASE" })
 
-export const incrementIfOdd = () => ({ type: "INCREMENT_IF_ODD" })
+export const increaseIfOdd = () => ({ type: "INCREASE_IF_ODD" })
 
-export const incrementAsync = () => ({ type: "INCREMENT_ASYNC" })
+export const increaseAsync = () => ({ type: "INCREASE_ASYNC" })
 
-export const decrement = () => ({ type: "DECREMENT" })
+export const decrease = () => ({ type: "DECREASE" })
 
 // Saga
 
-export function* incrementAsyncSaga(): Generator<*, *, *> {
+export function* increaseAsyncSaga(): Generator<*, *, *> {
   yield call(delay, 1000)
-  yield put(increment())
+  yield put(increase())
 }
 
 export function* countSaga(): Generator<*, *, *> {
-  yield* takeEvery("INCREMENT_ASYNC", incrementAsyncSaga)
+  yield* takeEvery("INCREASE_ASYNC", increaseAsyncSaga)
 }

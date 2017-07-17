@@ -13,10 +13,10 @@ import { call, put } from 'redux-saga/effects'
 export type State = number
 
 export type Action =
-    { type: 'INCREMENT' }
-  | { type: 'INCREMENT_IF_ODD' }
-  | { type: 'INCREMENT_ASYNC' }
-  | { type: 'DECREMENT' }
+    { type: 'INCREASE' }
+  | { type: 'INCREASE_IF_ODD' }
+  | { type: 'INCREASE_ASYNC' }
+  | { type: 'DECREASE' }
 
 export type Store = ReduxStore<State, Action>
 
@@ -27,13 +27,13 @@ export type Dispatch = ReduxDispatch<Action>
 // ActionCreators
 
 
-export const increment = () => ({ type: 'INCREMENT' })
+export const increase = () => ({ type: 'INCREASE' })
 
-export const incrementIfOdd = () => ({ type: 'INCREMENT_IF_ODD' })
+export const increaseIfOdd = () => ({ type: 'INCREASE_IF_ODD' })
 
-export const incrementAsync = () => ({ type: 'INCREMENT_ASYNC' })
+export const increaseAsync = () => ({ type: 'INCREASE_ASYNC' })
 
-export const decrement = () => ({ type: 'DECREMENT' })
+export const decrease = () => ({ type: 'DECREASE' })
 
 
 
@@ -42,11 +42,11 @@ export const decrement = () => ({ type: 'DECREMENT' })
 
 export const reducer = (state: State = 0, action: Object) => {
   switch (action.type) {
-    case 'INCREMENT':
+    case 'INCREASE':
       return state + 1
-    case 'INCREMENT_IF_ODD':
+    case 'INCREASE_IF_ODD':
       return state % 2 !== 0 ? state + 1 : state
-    case 'DECREMENT':
+    case 'DECREASE':
       return state - 1
     default:
       return state
@@ -58,13 +58,13 @@ export const reducer = (state: State = 0, action: Object) => {
 // Saga
 
 
-export function* incrementAsyncSaga(): Generator<*, *, *> {
+export function* increaseAsyncSaga(): Generator<*, *, *> {
   yield call(delay, 1000)
-  yield put(increment())
+  yield put(increase())
 }
 
 export function* saga(): Generator<*, *, *> {
-  yield* takeEvery('INCREMENT_ASYNC', incrementAsyncSaga)
+  yield* takeEvery('INCREASE_ASYNC', increaseAsyncSaga)
 }
 
 
@@ -74,36 +74,36 @@ export function* saga(): Generator<*, *, *> {
 
 export type Props = {
   count: number,
-  onIncrement: () => void,
-  onIncrementIfOdd: () => void,
-  onIncrementAsync: () => void,
-  onDecrement: () => void,
+  onIncrease: () => void,
+  onIncreaseIfOdd: () => void,
+  onIncreaseAsync: () => void,
+  onDecrease: () => void,
 }
 
 export const Counter = ({
   count,
-  onIncrement,
-  onIncrementIfOdd,
-  onIncrementAsync,
-  onDecrement,
+  onIncrease,
+  onIncreaseIfOdd,
+  onIncreaseAsync,
+  onDecrease,
 }: Props) => (
   <p>
     Clicked: {count} times
     {' '}
-    <button onClick={onIncrement}>
+    <button onClick={onIncrease}>
       +
     </button>
     {' '}
-    <button onClick={onDecrement}>
+    <button onClick={onDecrease}>
       -
     </button>
     {' '}
-    <button onClick={onIncrementIfOdd}>
-      Increment if odd
+    <button onClick={onIncreaseIfOdd}>
+      Increase if odd
     </button>
     {' '}
-    <button onClick={onIncrementAsync}>
-      Increment async
+    <button onClick={onIncreaseAsync}>
+      Increase async
     </button>
   </p>
 )
@@ -118,10 +118,10 @@ export const mapStateToProps = (state: State) => ({
 })
 
 export const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onIncrement: () => { dispatch(increment()) },
-  onIncrementIfOdd: () => { dispatch(incrementIfOdd()) },
-  onIncrementAsync: () => { dispatch(incrementAsync()) },
-  onDecrement: () => { dispatch(decrement()) },
+  onIncrease: () => { dispatch(increase()) },
+  onIncreaseIfOdd: () => { dispatch(increaseIfOdd()) },
+  onIncreaseAsync: () => { dispatch(increaseAsync()) },
+  onDecrease: () => { dispatch(decrease()) },
 })
 
 export const ConnectedCounter = connect(mapStateToProps, mapDispatchToProps)(Counter)

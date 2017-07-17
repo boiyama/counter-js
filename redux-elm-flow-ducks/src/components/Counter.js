@@ -3,22 +3,22 @@ import React from "react"
 
 export type Props = {
   count: number,
-  onIncrement: () => void,
-  onIncrementIfOdd: () => void,
-  onIncrementAsync: () => void,
-  onDecrement: () => void
+  onIncrease: () => void,
+  onIncreaseIfOdd: () => void,
+  onIncreaseAsync: () => void,
+  onDecrease: () => void
 }
 
 export default ({
   count,
-  onIncrement,
-  onIncrementIfOdd,
-  onIncrementAsync,
-  onDecrement
+  onIncrease,
+  onIncreaseIfOdd,
+  onIncreaseAsync,
+  onDecrease
 }: Props) =>
   <p>
-    Clicked: {count} times <button onClick={onIncrement}>+</button>{" "}
-    <button onClick={onDecrement}>-</button>{" "}
-    <button onClick={onIncrementIfOdd}>Increment if odd</button>{" "}
-    <button onClick={onIncrementAsync}>Increment async</button>
+    Clicked: {count} times <button onClick={onIncrease}>+</button>{" "}
+    <button onClick={onDecrease}>-</button>{" "}
+    <button onClick={onIncreaseIfOdd}>Increase if odd</button>{" "}
+    <button onClick={onIncreaseAsync}>Increase async</button>
   </p>

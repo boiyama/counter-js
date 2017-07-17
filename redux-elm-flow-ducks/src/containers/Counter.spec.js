@@ -12,23 +12,23 @@ describe("Counter container", () => {
     const dispatch = jest.fn()
     const props = mapDispatchToProps(dispatch)
 
-    it("onIncrement should dispatch increment", () => {
-      props.onIncrement()
+    it("onIncrease should dispatch increase", () => {
+      props.onIncrease()
       expect(dispatch).toBeCalledWith({ type: "INCREASE" })
     })
 
-    it("onIncrementIfOdd should dispatch incrementIfOdd", () => {
-      props.onIncrementIfOdd()
+    it("onIncreaseIfOdd should dispatch increaseIfOdd", () => {
+      props.onIncreaseIfOdd()
       expect(dispatch).toBeCalledWith({ type: "INCREASE_IF_ODD" })
     })
 
-    it("onIncrementAsync should dispatch incrementAsync", () => {
-      props.onIncrementAsync()
+    it("onIncreaseAsync should dispatch increaseAsync", () => {
+      props.onIncreaseAsync()
       expect(dispatch).toBeCalledWith({ type: "INCREASE_ASYNC" })
     })
 
-    it("onDecrement should dispatch decrement", () => {
-      props.onDecrement()
+    it("onDecrease should dispatch decrease", () => {
+      props.onDecrease()
       expect(dispatch).toBeCalledWith({ type: "DECREASE" })
     })
   })

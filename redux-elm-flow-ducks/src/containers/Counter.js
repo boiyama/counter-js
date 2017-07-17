@@ -8,16 +8,16 @@ export const mapStateToProps = (state: State) => ({
 })
 
 export const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onIncrement: () => {
+  onIncrease: () => {
     dispatch({ type: "INCREASE" })
   },
-  onIncrementIfOdd: () => {
+  onIncreaseIfOdd: () => {
     dispatch({ type: "INCREASE_IF_ODD" })
   },
-  onIncrementAsync: () => {
+  onIncreaseAsync: () => {
     dispatch({ type: "INCREASE_ASYNC" })
   },
-  onDecrement: () => {
+  onDecrease: () => {
     dispatch({ type: "DECREASE" })
   }
 })

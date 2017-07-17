@@ -4,18 +4,18 @@ import { shallow } from "enzyme"
 import Counter from "./Counter"
 
 describe("Counter component", () => {
-  const onIncrement = jest.fn()
-  const onIncrementIfOdd = jest.fn()
-  const onIncrementAsync = jest.fn()
-  const onDecrement = jest.fn()
+  const onIncrease = jest.fn()
+  const onIncreaseIfOdd = jest.fn()
+  const onIncreaseAsync = jest.fn()
+  const onDecrease = jest.fn()
 
   const component = shallow(
     <Counter
       count={0}
-      onIncrement={onIncrement}
-      onIncrementIfOdd={onIncrementIfOdd}
-      onIncrementAsync={onIncrementAsync}
-      onDecrement={onDecrement}
+      onIncrease={onIncrease}
+      onIncreaseIfOdd={onIncreaseIfOdd}
+      onIncreaseAsync={onIncreaseAsync}
+      onDecrease={onDecrease}
     />
   )
 
@@ -23,23 +23,23 @@ describe("Counter component", () => {
     expect(component.find("p").text()).toMatch(/^Clicked: 0 times/)
   })
 
-  it("first button should call onIncrement", () => {
+  it("first button should call onIncrease", () => {
     component.find("button").at(0).simulate("click")
-    expect(onIncrement).toBeCalled()
+    expect(onIncrease).toBeCalled()
   })
 
-  it("second button should call onDecrement", () => {
+  it("second button should call onDecrease", () => {
     component.find("button").at(1).simulate("click")
-    expect(onDecrement).toBeCalled()
+    expect(onDecrease).toBeCalled()
   })
 
-  it("third button should call onIncrementIfOdd", () => {
+  it("third button should call onIncreaseIfOdd", () => {
     component.find("button").at(2).simulate("click")
-    expect(onIncrementIfOdd).toBeCalled()
+    expect(onIncreaseIfOdd).toBeCalled()
   })
 
-  it("fourth button should call onIncrementAsync", () => {
+  it("fourth button should call onIncreaseAsync", () => {
     component.find("button").at(3).simulate("click")
-    expect(onIncrementAsync).toBeCalled()
+    expect(onIncreaseAsync).toBeCalled()
   })
 })

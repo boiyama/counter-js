@@ -3,10 +3,10 @@ import { connect } from "react-redux"
 import Counter from "../components/Counter"
 import type { State, Dispatch } from "../modules"
 import {
-  increment,
-  incrementIfOdd,
-  incrementAsync,
-  decrement
+  increase,
+  increaseIfOdd,
+  increaseAsync,
+  decrease
 } from "../modules/count"
 
 export const mapStateToProps = (state: State) => ({
@@ -14,17 +14,17 @@ export const mapStateToProps = (state: State) => ({
 })
 
 export const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onIncrement: () => {
-    dispatch(increment())
+  onIncrease: () => {
+    dispatch(increase())
   },
-  onIncrementIfOdd: () => {
-    dispatch(incrementIfOdd())
+  onIncreaseIfOdd: () => {
+    dispatch(increaseIfOdd())
   },
-  onIncrementAsync: () => {
-    dispatch(incrementAsync())
+  onIncreaseAsync: () => {
+    dispatch(increaseAsync())
   },
-  onDecrement: () => {
-    dispatch(decrement())
+  onDecrease: () => {
+    dispatch(decrease())
   }
 })
 

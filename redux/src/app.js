@@ -6,11 +6,11 @@ import { connect } from 'react-redux'
 // ActionCreators
 
 
-export const increment = () => ({ type: 'INCREMENT' })
+export const increase = () => ({ type: 'INCREASE' })
 
-export const incrementIfOdd = () => ({ type: 'INCREMENT_IF_ODD' })
+export const increaseIfOdd = () => ({ type: 'INCREASE_IF_ODD' })
 
-export const decrement = () => ({ type: 'DECREMENT' })
+export const decrease = () => ({ type: 'DECREASE' })
 
 
 
@@ -19,11 +19,11 @@ export const decrement = () => ({ type: 'DECREMENT' })
 
 export const reducer = (state = 0, action) => {
   switch (action.type) {
-    case 'INCREMENT':
+    case 'INCREASE':
       return state + 1
-    case 'INCREMENT_IF_ODD':
+    case 'INCREASE_IF_ODD':
       return state % 2 !== 0 ? state + 1 : state
-    case 'DECREMENT':
+    case 'DECREASE':
       return state - 1
     default:
       return state
@@ -37,28 +37,28 @@ export const reducer = (state = 0, action) => {
 
 export const Counter = ({
   count,
-  onIncrement,
-  onIncrementIfOdd,
-  onIncrementAsync,
-  onDecrement,
+  onIncrease,
+  onIncreaseIfOdd,
+  onIncreaseAsync,
+  onDecrease,
 }) => (
   <p>
     Clicked: {count} times
     {' '}
-    <button onClick={onIncrement}>
+    <button onClick={onIncrease}>
       +
     </button>
     {' '}
-    <button onClick={onDecrement}>
+    <button onClick={onDecrease}>
       -
     </button>
     {' '}
-    <button onClick={onIncrementIfOdd}>
-      Increment if odd
+    <button onClick={onIncreaseIfOdd}>
+      Increase if odd
     </button>
     {' '}
-    <button onClick={onIncrementAsync}>
-      Increment async
+    <button onClick={onIncreaseAsync}>
+      Increase async
     </button>
   </p>
 )
@@ -73,10 +73,10 @@ export const mapStateToProps = state => ({
 })
 
 export const mapDispatchToProps = dispatch => ({
-  onIncrement: () => { dispatch(increment()) },
-  onIncrementIfOdd: () => { dispatch(incrementIfOdd()) },
-  onIncrementAsync: () => { setTimeout(() => { dispatch(increment()) }, 1000) },
-  onDecrement: () => { dispatch(decrement()) },
+  onIncrease: () => { dispatch(increase()) },
+  onIncreaseIfOdd: () => { dispatch(increaseIfOdd()) },
+  onIncreaseAsync: () => { setTimeout(() => { dispatch(increase()) }, 1000) },
+  onDecrease: () => { dispatch(decrease()) },
 })
 
 export const ConnectedCounter = connect(mapStateToProps, mapDispatchToProps)(Counter)
