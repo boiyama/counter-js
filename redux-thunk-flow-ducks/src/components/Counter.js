@@ -1,12 +1,12 @@
 // @flow
-import React from 'react'
+import React from "react"
 
 export type Props = {
   count: number,
   onIncrement: () => void,
   onIncrementIfOdd: () => void,
   onIncrementAsync: () => void,
-  onDecrement: () => void,
+  onDecrement: () => void
 }
 
 export default ({
@@ -14,25 +14,11 @@ export default ({
   onIncrement,
   onIncrementIfOdd,
   onIncrementAsync,
-  onDecrement,
-}: Props) => (
+  onDecrement
+}: Props) =>
   <p>
-    Clicked: {count} times
-    {' '}
-    <button onClick={onIncrement}>
-      +
-    </button>
-    {' '}
-    <button onClick={onDecrement}>
-      -
-    </button>
-    {' '}
-    <button onClick={onIncrementIfOdd}>
-      Increment if odd
-    </button>
-    {' '}
-    <button onClick={onIncrementAsync}>
-      Increment async
-    </button>
+    Clicked: {count} times <button onClick={onIncrement}>+</button>{" "}
+    <button onClick={onDecrement}>-</button>{" "}
+    <button onClick={onIncrementIfOdd}>Increment if odd</button>{" "}
+    <button onClick={onIncrementAsync}>Increment async</button>
   </p>
-)
