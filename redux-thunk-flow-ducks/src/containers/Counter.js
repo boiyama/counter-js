@@ -1,6 +1,6 @@
 // @ flow
 import { connect } from "react-redux"
-import Counter from "../../components/Counter"
+import Counter from "../components/Counter"
 import type { State, Dispatch } from "../modules"
 import {
   increment,

@@ -2,8 +2,8 @@
 import React from "react"
 import { render } from "react-dom"
 import { Provider } from "react-redux"
-import Counter from "./redux/containers/Counter"
-import configureStore from "./redux/configureStore"
+import Counter from "./containers/Counter"
+import configureStore from "./configureStore"
 
 const store = configureStore()
 
