@@ -1,15 +1,26 @@
 port module Reducer exposing (..)
 
 import Json.Decode exposing (Value)
-import Json.Encode exposing (object)
+import Json.Encode exposing (int)
+import Process exposing (sleep)
+import Task exposing (perform)
+import Time exposing (millisecond)
 import Redux
-import Count
 
 
 -- PORT
 
 
-port initialize : (Value -> msg) -> Sub msg
+port increase : (Value -> msg) -> Sub msg
+
+
+port increaseIfOdd : (Value -> msg) -> Sub msg
+
+
+port increaseAsync : (Value -> msg) -> Sub msg
+
+
+port decrease : (Value -> msg) -> Sub msg
 
 
 
@@ -17,26 +28,17 @@ port initialize : (Value -> msg) -> Sub msg
 
 
 type alias Model =
-    { count : Count.Model
-    }
-
-
-initialModel : Model
-initialModel =
-    { count = Count.initialModel
-    }
+    Int
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( initialModel, Cmd.none )
+    ( 0, Cmd.none )
 
 
 encode : Model -> Json.Encode.Value
 encode model =
-    object
-        [ ( "count", Count.encode model.count )
-        ]
+    int model
 
 
 
@@ -44,8 +46,10 @@ encode model =
 
 
 type Msg
-    = Initialize
-    | CountMsg Count.Msg
+    = Increase
+    | IncreaseIfOdd
+    | IncreaseAsync
+    | Decrease
 
 
 
@@ -55,15 +59,34 @@ type Msg
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        Initialize ->
-            init
+        Increase ->
+            ( model + 1, Cmd.none )
 
-        CountMsg subMsg ->
+        IncreaseIfOdd ->
             let
-                ( count, countCmd ) =
-                    Count.update subMsg model.count
+                count =
+                    if model % 2 /= 0 then
+                        model + 1
+                    else
+                        model
             in
-                ( { model | count = count }, Cmd.map CountMsg countCmd )
+                ( count, Cmd.none )
+
+        IncreaseAsync ->
+            ( model, increaseInSecond )
+
+        Decrease ->
+            ( model - 1, Cmd.none )
+
+
+increaseInSecond : Cmd Msg
+increaseInSecond =
+    setTimeout Increase 1000
+
+
+setTimeout : Msg -> Float -> Cmd Msg
+setTimeout msg delay =
+    perform (always msg) (sleep (delay * millisecond))
 
 
 
@@ -73,8 +96,10 @@ update msg model =
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.batch
-        [ initialize <| always Initialize
-        , Sub.map CountMsg (Count.subscriptions model.count)
+        [ increase <| always Increase
+        , increaseIfOdd <| always IncreaseIfOdd
+        , increaseAsync <| always IncreaseAsync
+        , decrease <| always Decrease
         ]
 
 

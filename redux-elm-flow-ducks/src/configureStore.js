@@ -1,26 +1,26 @@
 // @flow
-import { createStore, applyMiddleware } from "redux"
-import createElmMiddleware, {
-  reducer as elmReducer
-} from "redux-elm-middleware"
+import { applyMiddleware, combineReducers, compose, createStore } from "redux"
+import createElmMiddleware, { createElmReducer } from "redux-elm-middleware"
 import Elm from "./modules/Reducer.elm"
 
 const configureStore = (preloadedState: Object = {}) => {
-  const reducer = (state, action) => ({
-    ...state,
-    ...elmReducer(state, action)
+  const elmReducer = createElmReducer(0)
+  const rootReducer = combineReducers({
+    count: elmReducer
   })
 
   const { run, elmMiddleware } = createElmMiddleware(Elm.Reducer.worker())
 
+  const composeEnhancers =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
   const store = createStore(
-    reducer,
+    rootReducer,
     preloadedState,
-    applyMiddleware(elmMiddleware)
+    composeEnhancers(applyMiddleware(elmMiddleware))
   )
 
   run(store)
-  store.dispatch({ type: "INITIALIZE" })
 
   return store
 }
