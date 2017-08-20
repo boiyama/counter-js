@@ -15,7 +15,7 @@
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-elm-state": "^0.1.0"
+    "react-elm-state": "^0.2.1"
   },
   "scripts": {
     "install:js": "npm install",
