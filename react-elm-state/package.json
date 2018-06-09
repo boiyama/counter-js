@@ -7,14 +7,14 @@
     "elm-hot-loader": "^0.5.4",
     "elm-test": "^0.18.7",
     "elm-webpack-loader": "^4.3.1",
-    "enzyme": "^2.9.1",
-    "flow-bin": "^0.53.0",
-    "proxyquire": "^1.8.0",
-    "react-scripts": "^1.0.10"
+    "enzyme": "^3.3.0",
+    "flow-bin": "^0.74.0",
+    "proxyquire": "^2.0.1",
+    "react-scripts": "^1.1.4"
   },
   "dependencies": {
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
     "react-elm-state": "^0.2.1"
   },
   "scripts": {
