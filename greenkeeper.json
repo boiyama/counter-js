@@ -1,0 +1,19 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "react-elm-state/elm-package.json",
+        "react-elm-state/package.json",
+        "react-elm-state/tests/elm-package.json",
+        "redux-elm-flow-ducks/elm-package.json",
+        "redux-elm-flow-ducks/package.json",
+        "redux-elm-flow-ducks/tests/elm-package.json",
+        "redux-saga-flow-ducks/package.json",
+        "redux-saga-flow/package.json",
+        "redux-saga/package.json",
+        "redux-thunk-flow-ducks/package.json",
+        "redux/package.json"
+      ]
+    }
+  }
+}
