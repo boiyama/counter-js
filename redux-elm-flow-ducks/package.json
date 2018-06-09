@@ -4,20 +4,20 @@
   "devDependencies": {
     "elm-hot-loader": "^0.5.4",
     "elm-webpack-loader": "^4.3.1",
-    "enzyme": "^2.9.1",
+    "enzyme": "^3.3.0",
     "eslint-config-prettier": "^2.3.0",
     "eslint-plugin-prettier": "^2.1.2",
-    "flow-bin": "^0.50.0",
+    "flow-bin": "^0.74.0",
     "prettier": "^1.5.3",
-    "proxyquire": "^1.8.0",
-    "react-scripts": "^1.0.10",
-    "react-test-renderer": "^15.6.1"
+    "proxyquire": "^2.0.1",
+    "react-scripts": "^1.1.4",
+    "react-test-renderer": "^16.4.0"
   },
   "dependencies": {
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
     "react-redux": "^5.0.5",
-    "redux": "^3.7.2",
+    "redux": "^4.0.0",
     "redux-elm-middleware": "^4.0.0"
   },
   "scripts": {
