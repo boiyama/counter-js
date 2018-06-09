@@ -1,5 +1,7 @@
 # Counter examples in JavaScript
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/boiyaa/counter-js.svg)](https://greenkeeper.io/)
+
 * [React, Redux, Jest, and Enzyme](redux)
 * [React, Redux, Jest, Enzyme, and redux-saga](redux-saga)
 * [React, Redux, Jest, Enzyme, redux-saga, and Flow](redux-saga-flow)
